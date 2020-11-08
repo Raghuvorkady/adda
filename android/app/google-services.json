@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "331065740448",
+    "firebase_url": "https://adda-12929.firebaseio.com",
+    "project_id": "adda-12929",
+    "storage_bucket": "adda-12929.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331065740448:android:608758c5d4ba9704a1cdc5",
+        "android_client_info": {
+          "package_name": "com.projectx.adda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "331065740448-kmcc963fubo3hma5g5eh6p28tudndmko.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXpptHd2lorIfUVER7m4Z0B_vnqJKh3nQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "331065740448-kmcc963fubo3hma5g5eh6p28tudndmko.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
