@@ -17,29 +17,17 @@ final Color attachButtonDisabledColor =HexColor("#999999");
 final Color sendButtonDisabledColor = HexColor("#999999");
 //images
 //TODO make strings final
-final String logoWithName = "assets/logos/logo-with-name1.png";
-final String logoCircle = "assets/logos/logo-circle1.png";
-final String logoSquare = "assets/logos/logo-square1.png";
-final String profile = "assets/icons/profile.png";
+final String logoWithName = "assets/logos/logo-with-name.png";
+final String logoCircle = "assets/logos/logo-circle.png";
+final String logoSquare = "assets/logos/logo-square.png";
 final String eyeOn = "assets/icons/eye-off.png";
 final String eyeOff = "assets/icons/eye-on.png";
-final String rkm1 = "assets/images/rkm-indian-flagBg 1.png";
-final String rkm2 = "assets/images/rkm-photo.jpg";
-final String family = "assets/images/famili.png";
-final String eWaste = "assets/images/waste.jpeg";
-final String lake = "assets/images/lake.png";
-final String attachmentEnabled = "assets/icons/attachmentFlipped.png";
-final String messageDelivered = "assets/icons/double-tick-delivered.png";
-final String messageRead = "assets/icons/double-tick-read.png";
 final String noImage = "assets/images/img_not_available.jpeg";
 
 final String defaultProfile = "https://firebasestorage.googleapis.com/v0/b/adda-12929.appspot.com/o/Default%20user%20config%2Fbaseline_account_circle_white_48dp.png?alt=media&token=69ab803d-e78c-45e1-8441-22690506283b";
 
 //icons
-final String cameraIcon = "assets/icons/camera.png";
-final String documentIcon = "assets/icons/document.png";
 final String galleryIcon = "assets/icons/gallery.png";
-final IconData contactIcon = Icons.account_box;
 final IconData gallery = Image.asset(galleryIcon) as IconData;
 //strings
 final String email = "email";
