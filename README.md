@@ -1,9 +1,8 @@
-# adda 
+# adda
 
 Adda is a mobile based application developed using Google's Flutter framework, which is really a good tool for rapid development of cross platform apps, web apps.
 <br>
 For developing the app, I have implemented few of the good features which are currently being used by top chatting apps like WhatsApp and Telegram.
-<br>
 
 ##### Technologies used to develop are:
 1. Figma
@@ -31,4 +30,4 @@ For developing the app, I have implemented few of the good features which are cu
 
 ### Demo
 
-Check out demo video [here]()
+Check out demo video of the app [here](https://youtu.be/YeGTDmMumXE)
