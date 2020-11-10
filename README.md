@@ -1,6 +1,8 @@
 # adda
 
-Adda is a mobile based application developed using Google's Flutter framework, which is really a good tool for rapid development of cross platform apps, web apps.
+Adda is a mobile based application used for one to one communication.
+<br>
+It is developed using Google's Flutter framework, which is really a good tool for rapid development of cross platform apps, web apps.
 <br>
 For developing the app, I have implemented few of the good features which are currently being used by top chatting apps like WhatsApp and Telegram.
 
