@@ -1,4 +1,4 @@
-# adda
+# adda 
 
 Adda is a mobile based application developed using Google's Flutter framework, which is really a good tool for rapid development of cross platform apps, web apps.
 <br>
@@ -25,8 +25,9 @@ For developing the app, I have implemented few of the good features which are cu
 
 [Click here](assets/visual-mockups-v2.0) to view the visual mockup of the app.
 
-![](assets/Screenshots/cover1_1x.png)
-![](assets/Screenshots/cover2_1x.png)
+![1](assets/screenshots/cover1_1x.png)
+
+![2](assets/screenshots/cover2_1x.png)
 
 ### Demo
 
