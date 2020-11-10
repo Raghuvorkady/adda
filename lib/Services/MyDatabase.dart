@@ -6,7 +6,8 @@ class MyDatabaseClass {
     return await Firestore.instance
         .collection("users")
         .where("name", isEqualTo: username)
-        .getDocuments();
+        .getDocuments()
+        .catchError((e) => print(e.toString()));
   }
 
   getUserByUserEmail(String userEmail) async {
@@ -62,17 +63,16 @@ class MyDatabaseClass {
   }
 
   getUserInfo() async {
-    return await Firestore.instance
-        .collection("users")
-        .getDocuments();
+    return await Firestore.instance.collection("users").getDocuments();
   }
+
   getUserInfoByUserId(String userID) async {
     return await Firestore.instance
         .collection("users")
         .where("userID", isEqualTo: userID)
         .snapshots();
   }
-  /*checkForEmail(String email) async {
+/*checkForEmail(String email) async {
     return await Firestore.instance
         .collection("users")
         .where("email", isEqualTo: email);

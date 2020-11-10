@@ -1,11 +1,11 @@
 import 'package:adda/ActivityScreens/HomeScreen.dart';
 import 'package:adda/HelperClass/Constants.dart';
 import 'package:adda/HelperClass/HelperFunctions.dart';
-import 'package:adda/HelperClass/Resources.dart';
+import 'package:adda/Resources/Icons.dart';
+import 'package:adda/Resources/Strings.dart';
 import 'package:adda/Services/MyDatabase.dart';
 import 'package:adda/Services/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:uuid/uuid.dart';
@@ -308,7 +308,11 @@ class _SignUpClassState extends State<SignUpClass> {
                                 });
                               },
                               icon: _passwordEye
-                                  ? Image.asset(eyeOff, width: 20, height: 20,)
+                                  ? Image.asset(
+                                      eyeOff,
+                                      width: 20,
+                                      height: 20,
+                                    )
                                   : Image.asset(eyeOn, width: 20, height: 20),
                             ),
                             border: InputBorder.none,
@@ -373,7 +377,11 @@ class _SignUpClassState extends State<SignUpClass> {
                                 });
                               },
                               icon: _confirmPasswordEye
-                                  ? Image.asset(eyeOff, width: 20, height: 20,)
+                                  ? Image.asset(
+                                      eyeOff,
+                                      width: 20,
+                                      height: 20,
+                                    )
                                   : Image.asset(eyeOn, width: 20, height: 20),
                             ),
                             border: InputBorder.none,

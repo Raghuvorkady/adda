@@ -1,5 +1,6 @@
-import 'package:adda/HelperClass/Resources.dart';
 import 'package:adda/HelperClass/Widget.dart';
+import 'package:adda/Resources/Colors.dart';
+import 'package:adda/Resources/Strings.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

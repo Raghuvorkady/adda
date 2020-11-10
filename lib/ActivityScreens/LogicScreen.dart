@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:adda/HelperClass/Authenticate.dart';
-import 'package:adda/HelperClass/Resources.dart';
+import 'package:adda/Resources/Icons.dart';
 import 'package:flutter/material.dart';
 
 import 'HomeScreen.dart';
@@ -16,7 +16,6 @@ class LogicScreenClass extends StatefulWidget {
 }
 
 class _LogicScreenClassState extends State<LogicScreenClass> {
-
   logic() {
     return widget.isUserLoggedIn != null
         ? widget.isUserLoggedIn

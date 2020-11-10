@@ -56,7 +56,8 @@ dependencies:
   firebase_messaging: ^6.0.0
 
   flutter_linkify: ^3.1.3
-  contact_picker: ^0.0.2
+  #contact_picker: ^0.0.2
+  fluttercontactpicker: ^2.4.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -69,7 +70,7 @@ dev_dependencies:
 flutter_icons:
   ios: true
   android: true
-  image_path: "assets/logos/logo-circle1.png"
+  image_path: "assets/logos/logo-circle.png"
   adaptive_icon_background: "#FDDB3A"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -86,7 +87,6 @@ flutter:
   assets:
     - assets/logos/
     - assets/icons/
-    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -100,19 +100,19 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-   - family: Lato
-     fonts:
-       - asset: fonts/Lato-Black.ttf
-       - asset: fonts/Lato-BlackItalic.ttf
-       - asset: fonts/Lato-Bold.ttf
-       - asset: fonts/Lato-BoldItalic.ttf
-       - asset: fonts/Lato-Italic.ttf
-       - asset: fonts/Lato-Light.ttf
-       - asset: fonts/Lato-LightItalic.ttf
-       - asset: fonts/Lato-Regular.ttf
-       - asset: fonts/Lato-Thin.ttf
-       - asset: fonts/Lato-ThinItalic.ttf
+  #  fonts:
+  #   - family: Lato
+  #     fonts:
+  #       - asset: fonts/Lato-Black.ttf
+  #       - asset: fonts/Lato-BlackItalic.ttf
+  #       - asset: fonts/Lato-Bold.ttf
+  #       - asset: fonts/Lato-BoldItalic.ttf
+  #       - asset: fonts/Lato-Italic.ttf
+  #       - asset: fonts/Lato-Light.ttf
+  #       - asset: fonts/Lato-LightItalic.ttf
+  #       - asset: fonts/Lato-Regular.ttf
+  #       - asset: fonts/Lato-Thin.ttf
+  #       - asset: fonts/Lato-ThinItalic.ttf
 
   #         style: italic
   #   - family: Trajan Pro

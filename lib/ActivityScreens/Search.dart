@@ -1,7 +1,8 @@
 import 'package:adda/ActivityScreens/Conversation.dart';
 import 'package:adda/HelperClass/Constants.dart';
-import 'package:adda/HelperClass/Resources.dart';
 import 'package:adda/HelperClass/Widget.dart';
+import 'package:adda/Resources/Colors.dart';
+import 'package:adda/Resources/Strings.dart';
 import 'package:adda/Services/MyDatabase.dart';
 import 'package:adda/examples/line_painter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -9,7 +10,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:intl/intl.dart';
 
 class SearchClass extends StatefulWidget {
   @override
@@ -74,7 +74,6 @@ class _SearchClassState extends State<SearchClass> {
 
     print(ConstantsClass.myUserId);
 
-    String mUserId = ConstantsClass.myUserId;
     String contactUerId = userID;
 
     String chatRoomId = getChatRoomId(userName, ConstantsClass.myName);
@@ -106,8 +105,11 @@ class _SearchClassState extends State<SearchClass> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                ConversationClass(chatRoomId: chatRoomId1, photoUrl: photoUrl, contactUserId: contactUerId,),
+            builder: (context) => ConversationClass(
+              chatRoomId: chatRoomId1,
+              photoUrl: photoUrl,
+              contactUserId: contactUerId,
+            ),
           ));
     } else {
       print("CHAT ROOM NOT CREATED!");
@@ -129,7 +131,7 @@ class _SearchClassState extends State<SearchClass> {
         leading: CachedNetworkImage(
           imageUrl: photoUrl ?? defaultProfile,
           placeholder: (context, url) => CircularProgressIndicator(),
-          imageBuilder: (context, imageProvider) =>Container(
+          imageBuilder: (context, imageProvider) => Container(
             child: CircleAvatar(
               radius: 28.0,
               backgroundImage: imageProvider,
@@ -228,7 +230,7 @@ class _SearchClassState extends State<SearchClass> {
                       onTap: () {
                         initiateSearch();
                       },
-                      splashColor: appYellow,
+                      splashColor: splashColor,
                       child: Padding(
                         padding: EdgeInsets.all(10),
                         child: Icon(

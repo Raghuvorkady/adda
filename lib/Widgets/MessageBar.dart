@@ -1,14 +1,15 @@
 import 'dart:math' as math;
 import 'dart:io';
+import 'package:adda/Resources/Colors.dart';
+import 'package:adda/Resources/Strings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:contact_picker/contact_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 
 import 'package:adda/HelperClass/Constants.dart';
-import 'package:adda/HelperClass/Resources.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +24,10 @@ class MessageBarClass extends StatefulWidget {
   static int limit = 20;
   static PopupMenu popupMenu;
 
-  MessageBarClass(
-      {this.myDatabase,
-      this.chatRoomId,
-      this.contactUserId,
-      this.scrollController});
+  MessageBarClass({this.myDatabase,
+    this.chatRoomId,
+    this.contactUserId,
+    this.scrollController});
 
   @override
   _MessageBarState createState() => _MessageBarState();
@@ -43,13 +43,13 @@ class _MessageBarState extends State<MessageBarClass> {
   bool attachmentButtonState = false;
   String message;
   TextEditingController messageTextFieldController =
-      new TextEditingController();
+  new TextEditingController();
 
   File file;
   bool isLoading;
   bool isShowSticker;
   String fileUrl;
-  Contact contact;
+  PhoneContact contact;
 
   final int _limitIncrement = 20;
 
@@ -108,7 +108,7 @@ class _MessageBarState extends State<MessageBarClass> {
         PickedFile pickedFile = await imagePicker.getImage(
             source: ImageSource.camera, imageQuality: 50);
         result = pickedFile as FilePickerResult;
-        File imageFilePath = File(pickedFile.path);
+        //File imageFilePath = File(pickedFile.path);
         messageType = 1;
         break;
       case 2:
@@ -125,8 +125,9 @@ class _MessageBarState extends State<MessageBarClass> {
         messageType = 3;
         break;
       case 4:
-        final ContactPicker contactPicker = new ContactPicker();
-        contact = await contactPicker.selectContact();
+        contact = await FlutterContactPicker.pickPhoneContact();
+        //final ContactPicker contactPicker = new ContactPicker();
+        //contact = await contactPicker.selectContact();
         messageType = 4;
         break;
     }
@@ -136,7 +137,8 @@ class _MessageBarState extends State<MessageBarClass> {
         file = File(result.files.single.path);
         print("FILE ${file.toString()}");
         print(
-            "FILE2 ${path.basenameWithoutExtension(file.path)} and EXT ${path.extension(file.path)}");
+            "FILE2 ${path.basenameWithoutExtension(file.path)} and EXT ${path
+                .extension(file.path)}");
 
         uploadFile(path.basenameWithoutExtension(file.path),
             path.extension(file.path), messageType);
@@ -147,7 +149,7 @@ class _MessageBarState extends State<MessageBarClass> {
           myDatabase: widget.myDatabase,
           chatRoomId: widget.chatRoomId,
           content:
-              "Name: ${contact.fullName}\nPhone: ${contact.phoneNumber.number}",
+          "Name: ${contact.fullName}\nPhone: ${contact.phoneNumber.number}",
           fileName: "Text",
           fileExtension: ".txt",
           messageType: 0);
@@ -156,16 +158,22 @@ class _MessageBarState extends State<MessageBarClass> {
 
   Future uploadFile(fileName, fileExtension, messageType) async {
     print("FILE $fileName");
-    int dateTime = DateTime.now().millisecondsSinceEpoch;
+    int dateTime = DateTime
+        .now()
+        .millisecondsSinceEpoch;
     String filePath;
     String cameraPath =
-        "ChatRoom/${widget.chatRoomId}/${ConstantsClass.myUserId}/camera/${fileName}_$dateTime";
+        "ChatRoom/${widget.chatRoomId}/${ConstantsClass
+        .myUserId}/camera/${fileName}_$dateTime";
     String imagePath =
-        "ChatRoom/${widget.chatRoomId}/${ConstantsClass.myUserId}/images/${fileName}_$dateTime";
+        "ChatRoom/${widget.chatRoomId}/${ConstantsClass
+        .myUserId}/images/${fileName}_$dateTime";
     String docPath =
-        "ChatRoom/${widget.chatRoomId}/${ConstantsClass.myUserId}/documents/${fileName}_$dateTime";
+        "ChatRoom/${widget.chatRoomId}/${ConstantsClass
+        .myUserId}/documents/${fileName}_$dateTime";
     String contactsPath =
-        "ChatRoom/${widget.chatRoomId}/${ConstantsClass.myUserId}/contacts/${fileName}_$dateTime";
+        "ChatRoom/${widget.chatRoomId}/${ConstantsClass
+        .myUserId}/contacts/${fileName}_$dateTime";
 
     print("IMAGE PATH : $imagePath");
     print("FILE PATH : $docPath");
@@ -185,7 +193,7 @@ class _MessageBarState extends State<MessageBarClass> {
         break;
     }
     StorageReference storageReference =
-        FirebaseStorage.instance.ref().child(filePath);
+    FirebaseStorage.instance.ref().child(filePath);
     StorageUploadTask uploadTask = storageReference.putFile(file);
     StorageTaskSnapshot storageTaskSnapshot = await uploadTask.onComplete;
     storageTaskSnapshot.ref.getDownloadURL().then((downloadUrl) {
@@ -209,13 +217,12 @@ class _MessageBarState extends State<MessageBarClass> {
     });
   }
 
-  sendMessage(
-      {myDatabase,
-      chatRoomId,
-      content,
-      String fileName,
-      String fileExtension,
-      int messageType}) {
+  sendMessage({myDatabase,
+    chatRoomId,
+    content,
+    String fileName,
+    String fileExtension,
+    int messageType}) {
     // type: 0 = text, 1 = camera, 2 = gallery, 3 = document, 4 = contact
     print("FILENAME : $fileName");
     print("FILE EXTENSION : $fileExtension");
@@ -223,10 +230,10 @@ class _MessageBarState extends State<MessageBarClass> {
     String snackMessage = messageType == 0
         ? "$fileName$fileExtension camera image is uploading"
         : messageType == 1
-            ? "$fileName$fileExtension gallery image is uploading"
-            : messageType == 2
-                ? "$fileName$fileExtension document is uploading"
-                : "$fileName$fileExtension contact is uploading";
+        ? "$fileName$fileExtension gallery image is uploading"
+        : messageType == 2
+        ? "$fileName$fileExtension document is uploading"
+        : "$fileName$fileExtension contact is uploading";
     SnackBar snackBar;
     if (snackMessage != null) {
       snackBar = SnackBar(
@@ -239,7 +246,7 @@ class _MessageBarState extends State<MessageBarClass> {
     }
 
     DocumentReference documentReference =
-        Firestore.instance.collection("ChatRoom").document(chatRoomId);
+    Firestore.instance.collection("ChatRoom").document(chatRoomId);
 
     switch (messageType) {
       case 0:
@@ -253,7 +260,9 @@ class _MessageBarState extends State<MessageBarClass> {
             "fileName": "Text",
             "fileExtension": ".txt",
             "isDelivered": false,
-            "time": DateTime.now().millisecondsSinceEpoch
+            "time": DateTime
+                .now()
+                .millisecondsSinceEpoch
           };
 
           Map<String, String> lastMessageMap = {"lastMessage": message};
@@ -273,7 +282,9 @@ class _MessageBarState extends State<MessageBarClass> {
           "fileName": fileName,
           "fileExtension": fileExtension,
           "isDelivered": false,
-          "time": DateTime.now().millisecondsSinceEpoch
+          "time": DateTime
+              .now()
+              .millisecondsSinceEpoch
         };
 
         Map<String, String> lastMessageMap = {"lastMessage": "📷$fileName"};
@@ -281,7 +292,7 @@ class _MessageBarState extends State<MessageBarClass> {
         documentReference.updateData(lastMessageMap);
         break;
       case 2:
-        //TODO check for null
+      //TODO check for null
         Scaffold.of(context).showSnackBar(snackBar);
 
         Map<String, dynamic> chatMessageMap = {
@@ -292,7 +303,9 @@ class _MessageBarState extends State<MessageBarClass> {
           "fileName": fileName,
           "fileExtension": fileExtension,
           "isDelivered": false,
-          "time": DateTime.now().millisecondsSinceEpoch
+          "time": DateTime
+              .now()
+              .millisecondsSinceEpoch
         };
 
         Map<String, String> lastMessageMap = {"lastMessage": "📸$fileName"};
@@ -300,7 +313,7 @@ class _MessageBarState extends State<MessageBarClass> {
         documentReference.updateData(lastMessageMap);
         break;
       case 3:
-        //TODO check for null
+      //TODO check for null
         Scaffold.of(context).showSnackBar(snackBar);
 
         Map<String, dynamic> chatMessageMap = {
@@ -311,29 +324,12 @@ class _MessageBarState extends State<MessageBarClass> {
           "fileName": fileName,
           "fileExtension": fileExtension,
           "isDelivered": false,
-          "time": DateTime.now().millisecondsSinceEpoch
+          "time": DateTime
+              .now()
+              .millisecondsSinceEpoch
         };
 
         Map<String, String> lastMessageMap = {"lastMessage": "📁$fileName"};
-        myDatabase.addConversationMessages(chatRoomId, chatMessageMap);
-        documentReference.updateData(lastMessageMap);
-        break;
-      case 4:
-        //TODO check for null
-        Scaffold.of(context).showSnackBar(snackBar);
-
-        Map<String, dynamic> chatMessageMap = {
-          "message": content,
-          "sendBy": ConstantsClass.myUserId,
-          "sendTo": widget.contactUserId,
-          "messageType": messageType,
-          "fileName": fileName,
-          "fileExtension": fileExtension,
-          "isDelivered": false,
-          "time": DateTime.now().millisecondsSinceEpoch
-        };
-
-        Map<String, String> lastMessageMap = {"lastMessage": "☎$fileName"};
         myDatabase.addConversationMessages(chatRoomId, chatMessageMap);
         documentReference.updateData(lastMessageMap);
         break;
@@ -389,8 +385,8 @@ class _MessageBarState extends State<MessageBarClass> {
 
   void maxColumn() {
     PopupMenu menu = PopupMenu(
-        // backgroundColor: Colors.teal,
-        // lineColor: Colors.tealAccent,
+      // backgroundColor: Colors.teal,
+      // lineColor: Colors.tealAccent,
         maxColumn: 3,
         items: [
           MenuItem(
@@ -420,9 +416,9 @@ class _MessageBarState extends State<MessageBarClass> {
 
   void customBackground() {
     PopupMenu menu = PopupMenu(
-        // backgroundColor: Colors.teal,
-        // lineColor: Colors.tealAccent,
-        // maxColumn: 2,
+      // backgroundColor: Colors.teal,
+      // lineColor: Colors.tealAccent,
+      // maxColumn: 2,
         items: [
           MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
           MenuItem(
@@ -465,7 +461,7 @@ class _MessageBarState extends State<MessageBarClass> {
 
   _scrollListener() {
     if (widget.scrollController.offset >=
-            widget.scrollController.position.maxScrollExtent &&
+        widget.scrollController.position.maxScrollExtent &&
         !widget.scrollController.position.outOfRange) {
       print("reach the bottom");
       setState(() {
@@ -475,7 +471,7 @@ class _MessageBarState extends State<MessageBarClass> {
       });
     }
     if (widget.scrollController.offset <=
-            widget.scrollController.position.minScrollExtent &&
+        widget.scrollController.position.minScrollExtent &&
         !widget.scrollController.position.outOfRange) {
       print("reach the top");
       setState(() {
@@ -508,7 +504,7 @@ class _MessageBarState extends State<MessageBarClass> {
                   Expanded(
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                      EdgeInsets.symmetric(horizontal: 15, vertical: 0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Colors.white,
@@ -611,7 +607,7 @@ class _MessageBarState extends State<MessageBarClass> {
                                 spreadRadius: 0.2,
                                 blurRadius: 1,
                                 offset:
-                                    Offset(0, 1), // changes position of shadow
+                                Offset(0, 1), // changes position of shadow
                               ),
                             ],
                           ),

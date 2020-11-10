@@ -1,16 +1,33 @@
 # adda
 
-A new Flutter application.
+Adda is a mobile based application developed using Google's Flutter framework, which is really a good tool for rapid development of cross platform apps, web apps.
+<br>
+For developing the app, I have implemented few of the good features which are currently being used by top chatting apps like WhatsApp and Telegram.
+<br>
 
-## Getting Started
+##### Technologies used to develop are:
+1. Figma
+2. Flutter
+3. Firebase Functions
+4. Firebase Storage
+5. Firebase Cloud Firestore
+6. Firebase Authentication
 
-This project is a starting point for a Flutter application.
+##### Languages used are:
+1. Dart
+2. Node.js
 
-A few resources to get you started if this is your first Flutter project:
+### Configure
+- Setup keystore.properties if you are going to build a release version of the app. [This](https://flutter.dev/docs/deployment/android#create-a-keystore) will guide you to make one.
+- If you want to setup your own Firebase database i.e adding google-services.json, [click here](http://alphatech.technology/Howto-Entry-srk/Google-Services-Json-bek/) for the docs.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Screenshots
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Click here](assets/visual-mockups-v2.0) to view the visual mockup of the app.
+
+![](assets/Screenshots/cover1_1x.png)
+![](assets/Screenshots/cover2_1x.png)
+
+### Demo
+
+Check out demo video [here]()

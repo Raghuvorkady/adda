@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:adda/ActivityScreens/HomeScreen.dart';
 import 'package:adda/HelperClass/Constants.dart';
-import 'package:adda/HelperClass/Resources.dart';
-import 'package:adda/HelperClass/Widget.dart';
+import 'package:adda/Resources/Colors.dart';
+import 'package:adda/Resources/Strings.dart';
 import 'package:adda/Services/MyDatabase.dart';
 import 'package:adda/Widgets/ChatBubbleContact.dart';
 import 'package:adda/Widgets/ChatBubbleMine.dart';
@@ -17,7 +16,8 @@ class ConversationClass extends StatefulWidget {
   final String chatRoomId, photoUrl, contactUserId;
   final bool isOnline;
 
-  ConversationClass({this.chatRoomId, this.photoUrl, this.isOnline, this.contactUserId});
+  ConversationClass(
+      {this.chatRoomId, this.photoUrl, this.isOnline, this.contactUserId});
 
   @override
   _ConversationClassState createState() => _ConversationClassState();
@@ -49,8 +49,7 @@ class _ConversationClassState extends State<ConversationClass> {
                 shrinkWrap: true,
                 reverse: true,
                 scrollDirection: Axis.vertical,
-                //TODO new change here
-                //physics: ClampingScrollPhysics(),
+                //TODO bottom scroll,
                 itemCount: snapshot.data.documents.length,
                 itemBuilder: (context, index) {
                   bool isSendByMe =
@@ -65,7 +64,8 @@ class _ConversationClassState extends State<ConversationClass> {
                             snapshot.data.documents[index].data["fileName"],
                         fileExtension: snapshot
                             .data.documents[index].data["fileExtension"],
-                        isDelivered: snapshot.data.documents[index].data["isDelivered"],
+                        isDelivered:
+                            snapshot.data.documents[index].data["isDelivered"],
                         timeStamp: new DateTime.fromMillisecondsSinceEpoch(
                             snapshot.data.documents[index].data["time"]));
                   } else {
@@ -102,15 +102,14 @@ class _ConversationClassState extends State<ConversationClass> {
   @override
   Widget build(BuildContext context) {
     //listViewScrollController.animateTo(listViewScrollController.position.maxScrollExtent, curve: Curves.fastOutSlowIn);
-    CollectionReference reference =
-    Firestore.instance.collection('users');
+    CollectionReference reference = Firestore.instance.collection('users');
     reference.snapshots().listen((querySnapshot) {
-      querySnapshot.documentChanges.forEach((change) async{
-          if (widget.contactUserId == change.document.documentID) {
-            setState(() {
-              isOnline = change.document.data["isOnline"]??false;
-            });
-          }
+      querySnapshot.documentChanges.forEach((change) async {
+        if (widget.contactUserId == change.document.documentID) {
+          setState(() {
+            isOnline = change.document.data["isOnline"] ?? false;
+          });
+        }
       });
     });
     return Scaffold(
@@ -120,19 +119,19 @@ class _ConversationClassState extends State<ConversationClass> {
         title: ListTile(
           leading: widget.photoUrl != null
               ? CachedNetworkImage(
-              width: 40,
-              height: 40,
-              imageUrl: widget.photoUrl,
-              errorWidget: (context, url, error) => Image.network(
-                defaultProfile,
-                color: Colors.grey,
-              ),
-              imageBuilder: (context, imageProvider) => Container(
-                child: CircleAvatar(
-                  backgroundImage: imageProvider,
-                  radius: 20,
-                ),
-              ))
+                  width: 40,
+                  height: 40,
+                  imageUrl: widget.photoUrl,
+                  errorWidget: (context, url, error) => Image.network(
+                        defaultProfile,
+                        color: Colors.grey,
+                      ),
+                  imageBuilder: (context, imageProvider) => Container(
+                        child: CircleAvatar(
+                          backgroundImage: imageProvider,
+                          radius: 20,
+                        ),
+                      ))
               : CircularProgressIndicator(),
           title: Text(
             ConstantsClass.chatName,
@@ -173,56 +172,10 @@ class _ConversationClassState extends State<ConversationClass> {
                 contactUserId: widget.contactUserId,
                 scrollController: listViewScrollController,
               ),
-              /*Container(
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 63),
-                child: Scrollbar(controller: listViewScrollController,child: chatMessageList()),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  MessageBar(
-                    myDatabase: myDatabase,
-                    chatRoomId: widget.chatRoomId,
-                    scrollController: listViewScrollController,
-                  ),
-                ],
-              ),
-            ],
-
-          ),
-        ),*/
             ],
           ),
         ],
       ),
     );
-  }
-
-  // ignore: missing_return
-  Future<bool> _onBackPressed() {
-    MessageBarClass.popupMenu.dismiss();
-//    return null;
-    /*showDialog(
-          context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text('Are you sure?'),
-            content: new Text('Do you want to exit an App'),
-            actions: <Widget>[
-              new GestureDetector(
-                onTap: () => Navigator.of(context).pop(false),
-                child: Text("NO"),
-              ),
-              SizedBox(height: 16),
-              new GestureDetector(
-                onTap: () => Navigator.of(context).pop(true),
-                child: Text("YES"),
-              ),
-            ],
-          ),
-        ) ??
-        false;*/
   }
 }

@@ -21,6 +21,7 @@ class HelperFunctions {
     return await sharedPreferences.setString(
         sharedPreferenceUserNameKey, userName);
   }
+
   static Future<bool> setUserIDSharedPreference(String userName) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return await sharedPreferences.setString(
@@ -38,6 +39,7 @@ class HelperFunctions {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return await sharedPreferences.getBool(sharedPreferenceUserLoggedInKey);
   }
+
   static Future<String> getUserIDSharedPreference() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return await sharedPreferences.getString(sharedPreferenceUserIDKey);

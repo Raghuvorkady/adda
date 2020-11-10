@@ -1,6 +1,6 @@
 import 'package:adda/ActivityScreens/HomeScreen.dart';
 import 'package:adda/HelperClass/Constants.dart';
-import 'package:adda/HelperClass/Resources.dart';
+import 'package:adda/Resources/Colors.dart';
 import 'package:adda/Resources/UserInfo.dart';
 import 'package:adda/Services/MyDatabase.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -29,10 +29,6 @@ class _ProfileContentState extends State<ProfileContent> {
   UserInfoClass userInfoClass = new UserInfoClass();
 
   getUserInfoFromClass() {
-    int usersLength = HomeScreenClass.usersInfo.length;
-    int i = 0;
-    bool isUserPresent = false;
-
     Stopwatch stopwatch = new Stopwatch()..start();
 
     HomeScreenClass.usersInfo.forEach((element) {
@@ -110,7 +106,7 @@ class _ProfileContentState extends State<ProfileContent> {
                 imageUrl: userInfoClass.photoUrl ?? "loading",
                 placeholder: (context, url) => Container(
                   child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(appYellow),
+                    valueColor: AlwaysStoppedAnimation<Color>(appPrimaryColor),
                   ),
                   width: 200.0,
                   height: 200.0,
@@ -206,8 +202,7 @@ class _ProfileContentState extends State<ProfileContent> {
                               ],
                             ),
                           ],
-                        )
-                    ),
+                        )),
                     Divider(),
                   ],
                 )),

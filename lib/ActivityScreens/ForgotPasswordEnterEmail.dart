@@ -1,5 +1,6 @@
-import 'package:adda/HelperClass/Resources.dart';
 import 'package:adda/HelperClass/Widget.dart';
+import 'package:adda/Resources/Colors.dart';
+import 'package:adda/Resources/Strings.dart';
 import 'package:adda/Services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -119,7 +120,11 @@ class _ForgotPasswordEnterEmailClassState
                       setState(() {
                         isProceed = true;
                       });
-                      await authMethods.resetPassword(_emailTextEditingController.text.toString().trim()).then((value) => null);
+                      await authMethods
+                          .resetPassword(_emailTextEditingController.text
+                              .toString()
+                              .trim())
+                          .then((value) => null);
                       print("PASSWORD RESET sent");
                     },
                     child: Text(

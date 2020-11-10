@@ -1,12 +1,11 @@
-import 'package:flutter/animation.dart';
+import 'package:adda/Resources/Colors.dart';
+import 'package:adda/Resources/Strings.dart';
 import 'package:adda/ActivityScreens/Conversation.dart';
 import 'package:adda/HelperClass/Constants.dart';
-import 'package:adda/HelperClass/Resources.dart';
 import 'package:adda/examples/line_painter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:intl/intl.dart';
 
 class ContactCardClass extends StatelessWidget {
   final String name, photoUrl, chatRoomId, contactUserId, lastMessage;

@@ -1,6 +1,7 @@
 import 'package:adda/HelperClass/ImageViewer.dart';
-import 'package:adda/HelperClass/Resources.dart';
 import 'package:adda/HelperClass/Widget.dart';
+import 'package:adda/Resources/Colors.dart';
+import 'package:adda/Resources/Icons.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -49,8 +50,6 @@ class _ChatBubbleContactClassState extends State<ChatBubbleContactClass> {
     String folder;
     Directory directoryRoot = await getExternalStorageDirectory();
     String file = "$fileName$fileExtension";
-    Directory baseDir =
-        await getApplicationDocumentsDirectory(); //works for both iOS and Android
 
     Directory directory = new Directory(directoryRoot.path + '/' + 'Documents');
 
@@ -105,10 +104,10 @@ class _ChatBubbleContactClassState extends State<ChatBubbleContactClass> {
         Scaffold.of(context).showSnackBar(snackBar);
       }
     } else {
-        setState(() {
-          downloaded = true;
-          isProgressIndicatorVisible = false;
-        });
+      setState(() {
+        downloaded = true;
+        isProgressIndicatorVisible = false;
+      });
       openFile(fileName: fileName, fileExtension: fileExtension);
     }
   }
@@ -190,8 +189,8 @@ class _ChatBubbleContactClassState extends State<ChatBubbleContactClass> {
                             child: CachedNetworkImage(
                               placeholder: (context, url) => Container(
                                 child: CircularProgressIndicator(
-                                  valueColor:
-                                      AlwaysStoppedAnimation<Color>(appYellow),
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      appPrimaryColor),
                                 ),
                                 width: 200.0,
                                 height: 200.0,
@@ -235,7 +234,10 @@ class _ChatBubbleContactClassState extends State<ChatBubbleContactClass> {
                                           fileName: widget.fileName,
                                           fileExtension: widget.fileExtension);
                                 },
-                                icon: Icon(Icons.insert_drive_file, color: Colors.purple[300],),
+                                icon: Icon(
+                                  Icons.insert_drive_file,
+                                  color: Colors.purple[300],
+                                ),
                                 label: Flexible(
                                   child: Text(
                                     "${widget.fileName}${widget.fileExtension}",
@@ -252,29 +254,27 @@ class _ChatBubbleContactClassState extends State<ChatBubbleContactClass> {
             Padding(
               padding: EdgeInsets.only(top: 2, left: 5, right: 8, bottom: 2),
               child: Text.rich(
-                TextSpan(
-                    style: timeStampStyle(),
-                    children: [
-                      TextSpan(
-                        text: new DateFormat("h:mm a").format(widget.timeStamp),
-                      ),
-                      WidgetSpan(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: Visibility(
-                            visible: isProgressIndicatorVisible,
-                            child: SizedBox(
-                              width: 15,
-                              height: 15,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2.5,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.green[300]),
-                                backgroundColor: Colors.redAccent,
-                                value: progress,
-                              ),
-                            ),
-                            /* CircularPercentIndicator(
+                TextSpan(style: timeStampStyle(), children: [
+                  TextSpan(
+                    text: new DateFormat("h:mm a").format(widget.timeStamp),
+                  ),
+                  WidgetSpan(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Visibility(
+                        visible: isProgressIndicatorVisible,
+                        child: SizedBox(
+                          width: 15,
+                          height: 15,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2.5,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.green[300]),
+                            backgroundColor: Colors.redAccent,
+                            value: progress,
+                          ),
+                        ),
+                        /* CircularPercentIndicator(
                               percent: progress,
                               lineWidth: 4.0,
                               animation: true,
@@ -289,10 +289,10 @@ class _ChatBubbleContactClassState extends State<ChatBubbleContactClass> {
                             ),
                               progressColor: Colors.green, radius: 40,
                             ),*/
-                          ),
-                        ),
                       ),
-                    ]),
+                    ),
+                  ),
+                ]),
                 textAlign: TextAlign.end,
               ),
             ),

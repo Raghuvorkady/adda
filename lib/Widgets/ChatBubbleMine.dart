@@ -2,8 +2,9 @@ import 'dart:io';
 import 'dart:async';
 
 import 'package:adda/HelperClass/ImageViewer.dart';
-import 'package:adda/HelperClass/Resources.dart';
 import 'package:adda/HelperClass/Widget.dart';
+import 'package:adda/Resources/Colors.dart';
+import 'package:adda/Resources/Icons.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -50,8 +51,8 @@ class _ChatBubbleMineClassState extends State<ChatBubbleMineClass> {
     String folder;
     Directory directoryRoot = await getExternalStorageDirectory();
     String file = "$fileName$fileExtension";
-    Directory baseDir =
-        await getApplicationDocumentsDirectory(); //works for both iOS and Android
+    /*Directory baseDir =
+        await getApplicationDocumentsDirectory(); //works for both iOS and Android*/
 
     Directory directory = new Directory(directoryRoot.path + '/' + 'Documents');
 
@@ -183,8 +184,8 @@ class _ChatBubbleMineClassState extends State<ChatBubbleMineClass> {
                             child: CachedNetworkImage(
                               placeholder: (context, url) => Container(
                                 child: CircularProgressIndicator(
-                                  valueColor:
-                                      AlwaysStoppedAnimation<Color>(appYellow),
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      appPrimaryColor),
                                 ),
                                 width: 200.0,
                                 height: 200.0,
@@ -254,7 +255,9 @@ class _ChatBubbleMineClassState extends State<ChatBubbleMineClass> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 3),
                       child: Icon(
-                        widget.isDelivered??false ? Icons.done_all:Icons.check,
+                        widget.isDelivered ?? false
+                            ? Icons.done_all
+                            : Icons.check,
                         size: 16,
                         color: appLightBlack.withOpacity(0.8),
                       ),

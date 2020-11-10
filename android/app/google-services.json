@@ -30,6 +30,13 @@
             {
               "client_id": "331065740448-kmcc963fubo3hma5g5eh6p28tudndmko.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "331065740448-gj5p4hiqh39smp39nujlf97dksl31dsl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.projectx.adda"
+              }
             }
           ]
         }

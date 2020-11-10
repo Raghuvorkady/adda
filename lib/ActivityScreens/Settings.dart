@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:adda/HelperClass/Constants.dart';
-import 'package:adda/HelperClass/Resources.dart';
 import 'package:adda/HelperClass/SharedPref.dart';
+import 'package:adda/Resources/Colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as path;
+
 class ChatSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -65,16 +66,20 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   void readLocal() async {
     prefs = await SharedPreferences.getInstance();
-   /* id = prefs.getString('id') ?? '';
+    /* id = prefs.getString('id') ?? '';
     nickname = prefs.getString('nickname') ?? '';
     aboutMe = prefs.getString('aboutMe') ?? '';
     photoUrl = prefs.getString('photoUrl') ?? '';*/
 
-    SharedPreferencesClass.sharedPreferences = await SharedPreferences.getInstance();
+    SharedPreferencesClass.sharedPreferences =
+        await SharedPreferences.getInstance();
     id = SharedPreferencesClass.sharedPreferences.getString('id') ?? '';
-    nickname = SharedPreferencesClass.sharedPreferences.getString('nickname') ?? '';
-    aboutMe = SharedPreferencesClass.sharedPreferences.getString('aboutMe') ?? '';
-    photoUrl = SharedPreferencesClass.sharedPreferences.getString('photoUrl') ?? '';
+    nickname =
+        SharedPreferencesClass.sharedPreferences.getString('nickname') ?? '';
+    aboutMe =
+        SharedPreferencesClass.sharedPreferences.getString('aboutMe') ?? '';
+    photoUrl =
+        SharedPreferencesClass.sharedPreferences.getString('photoUrl') ?? '';
 
     controllerNickname = TextEditingController(text: nickname);
     controllerAboutMe = TextEditingController(text: aboutMe);
@@ -115,7 +120,8 @@ class SettingsScreenState extends State<SettingsScreen> {
           };
           documentReference.updateData(userInfoMap).then((data) async {
             //await prefs.setString('photoUrl', photoUrl);
-            await SharedPreferencesClass.sharedPreferences.setString('photoUrl', photoUrl);
+            await SharedPreferencesClass.sharedPreferences
+                .setString('photoUrl', photoUrl);
             setState(() {
               isLoading = false;
             });
@@ -161,15 +167,20 @@ class SettingsScreenState extends State<SettingsScreen> {
     };
 
     Firestore.instance
-        .collection("users").document(ConstantsClass.myUserId).updateData(userInfoMap)
+        .collection("users")
+        .document(ConstantsClass.myUserId)
+        .updateData(userInfoMap)
         .then((data) async {
       /*await prefs.setString('nickname', nickname);
       await prefs.setString('aboutMe', aboutMe);
       await prefs.setString('photoUrl', photoUrl);*/
 
-      await SharedPreferencesClass.sharedPreferences.setString('nickname', nickname);
-      await SharedPreferencesClass.sharedPreferences.setString('aboutMe', aboutMe);
-      await SharedPreferencesClass.sharedPreferences.setString('photoUrl', photoUrl);
+      await SharedPreferencesClass.sharedPreferences
+          .setString('nickname', nickname);
+      await SharedPreferencesClass.sharedPreferences
+          .setString('aboutMe', aboutMe);
+      await SharedPreferencesClass.sharedPreferences
+          .setString('photoUrl', photoUrl);
 
       setState(() {
         isLoading = false;

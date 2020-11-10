@@ -1,4 +1,4 @@
-import 'package:adda/HelperClass/Resources.dart';
+import 'package:adda/Resources/Colors.dart';
 import 'package:flutter/material.dart';
 
 class Loading extends StatelessWidget {
@@ -9,7 +9,7 @@ class Loading extends StatelessWidget {
     return Container(
       child: Center(
         child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(appYellow),
+          valueColor: AlwaysStoppedAnimation<Color>(appPrimaryColor),
         ),
       ),
       color: Colors.white.withOpacity(0.8),

@@ -5,5 +5,5 @@ class SharedPreferencesClass {
 
   static SharedPreferences sharedPreferences;
 
-  //SharedPreferencesClass({this.id, this.nickname, this.aboutMe, this.photoUrl});
+//SharedPreferencesClass({this.id, this.nickname, this.aboutMe, this.photoUrl});
 }

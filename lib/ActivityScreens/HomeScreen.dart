@@ -4,10 +4,10 @@ import 'package:adda/ActivityScreens/Settings.dart';
 import 'package:adda/HelperClass/Authenticate.dart';
 import 'package:adda/HelperClass/Constants.dart';
 import 'package:adda/HelperClass/HelperFunctions.dart';
-import 'package:adda/HelperClass/Resources.dart';
 import 'package:adda/HelperClass/SharedPref.dart';
 import 'package:adda/Model/ChatRoomTileInfo.dart';
 import 'package:adda/Resources/Choice.dart';
+import 'package:adda/Resources/Colors.dart';
 import 'package:adda/Resources/UserInfo.dart';
 import 'package:adda/Services/MyDatabase.dart';
 import 'package:adda/Services/auth.dart';
@@ -17,6 +17,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HomeScreenClass extends StatefulWidget {
   static List<UserInfoClass> usersInfo = [];
@@ -106,7 +107,6 @@ class _HomeScreenClassState extends State<HomeScreenClass>
                       // Do something with change
                       /* print("Doc changes (isOnline) $isOnline");
                       print(change.document.data["name"]);*/
-                      //TODO pending work here
                       for (int i = 0; i < length; i++) {
                         if (HomeScreenClass.usersInfo[i].userID ==
                             change.document.documentID) {
@@ -148,9 +148,36 @@ class _HomeScreenClassState extends State<HomeScreenClass>
   void initState() {
     getUserInfoFromDatabase();
     getUserInfoChats();
+    requestPermission();
     configureFCM();
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+  }
+
+  requestPermission() async {
+    var storagePermissionStatus = await Permission.storage.status;
+    var contactsPermissionStatus = await Permission.contacts.status;
+    var cameraPermissionStatus = await Permission.camera.status;
+    //var notificationPermissionStatus = await Permission.notification.status;
+
+    if (storagePermissionStatus.isUndetermined ||
+        storagePermissionStatus.isDenied ||
+        contactsPermissionStatus.isUndetermined ||
+        contactsPermissionStatus.isDenied ||
+        cameraPermissionStatus.isUndetermined ||
+        cameraPermissionStatus.isDenied) {
+      // You can request multiple permissions at once.
+
+      Map<Permission, PermissionStatus> statuses = await [
+        Permission.storage,
+        Permission.contacts,
+        Permission.camera
+      ].request();
+      print(statuses[
+          Permission.storage]); // it should print PermissionStatus.granted
+      print(statuses[
+          Permission.contacts]); // it should print PermissionStatus.granted
+    }
   }
 
   getToken() async {
@@ -207,7 +234,6 @@ class _HomeScreenClassState extends State<HomeScreenClass>
   }
 
   updateStatus(bool status) async {
-    var my = ConstantsClass.myUserId;
     Map<String, bool> userInfoMap = {
       'isOnline': status,
     };
@@ -311,12 +337,13 @@ class _HomeScreenClassState extends State<HomeScreenClass>
       isLoading = true;
     });*/
 
-    await FirebaseAuth.instance.signOut();
-    HelperFunctions.setUserLoggedInSharedPreference(false);
+    await HelperFunctions.setUserLoggedInSharedPreference(false);
 
-    SharedPreferencesClass.sharedPreferences.setString("nickname", null);
-    SharedPreferencesClass.sharedPreferences.setString("aboutMe", null);
-    SharedPreferencesClass.sharedPreferences.setString("photoUrl", null);
+    await FirebaseAuth.instance.signOut();
+
+    await SharedPreferencesClass.sharedPreferences.setString("nickname", null);
+    await SharedPreferencesClass.sharedPreferences.setString("aboutMe", null);
+    await SharedPreferencesClass.sharedPreferences.setString("photoUrl", null);
 
     /*await googleSignIn.disconnect();
     await googleSignIn.signOut();*/
@@ -410,11 +437,11 @@ class _HomeScreenClassState extends State<HomeScreenClass>
                 builder: (BuildContext context) => SearchClass(),
               ));
         },
-        backgroundColor: Colors.white,
+        backgroundColor: appPrimaryColor,
         tooltip: "Search",
         child: Icon(
           Icons.search,
-          color: appBlack,
+          color: Colors.white,
         ),
       ),
     );
@@ -429,11 +456,7 @@ class _HomeScreenClassState extends State<HomeScreenClass>
 }
 
 class ChatRoomTile extends StatelessWidget {
-  final String userName,
-      chatRoomId,
-      photoUrl,
-      lastMessage,
-      contactUserId;
+  final String userName, chatRoomId, photoUrl, lastMessage, contactUserId;
   final bool isOnline;
 
   ChatRoomTile(

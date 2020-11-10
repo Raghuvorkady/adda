@@ -1,5 +1,7 @@
-import 'package:adda/HelperClass/Resources.dart';
 import 'package:adda/HelperClass/Widget.dart';
+import 'package:adda/Resources/Colors.dart';
+import 'package:adda/Resources/Icons.dart';
+import 'package:adda/Resources/Strings.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordEnterOtpClass extends StatefulWidget {

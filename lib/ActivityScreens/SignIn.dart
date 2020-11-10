@@ -1,7 +1,8 @@
 import 'package:adda/ActivityScreens/ForgotPasswordEnterEmail.dart';
 import 'package:adda/ActivityScreens/HomeScreen.dart';
 import 'package:adda/HelperClass/HelperFunctions.dart';
-import 'package:adda/HelperClass/Resources.dart';
+import 'package:adda/Resources/Icons.dart';
+import 'package:adda/Resources/Strings.dart';
 import 'package:adda/Services/MyDatabase.dart';
 import 'package:adda/Services/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -200,10 +201,10 @@ class _SignInClassState extends State<SignInClass> {
                                 ? Focus.of(context).unfocus()
                                 : print("EMAIL false");
                           },
-                            style: TextStyle(
-                                color: HexColor("#444444"),
-                                fontSize: 14.0,
-                                letterSpacing: 0.5),
+                          style: TextStyle(
+                              color: HexColor("#444444"),
+                              fontSize: 14.0,
+                              letterSpacing: 0.5),
                           obscureText: !_showPassword,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
@@ -215,7 +216,11 @@ class _SignInClassState extends State<SignInClass> {
                                 });
                               },
                               icon: _passwordEye
-                                  ? Image.asset(eyeOff, width: 20, height: 20,)
+                                  ? Image.asset(
+                                      eyeOff,
+                                      width: 20,
+                                      height: 20,
+                                    )
                                   : Image.asset(eyeOn, width: 20, height: 20),
                             ),
                             border: InputBorder.none,
@@ -270,7 +275,8 @@ class _SignInClassState extends State<SignInClass> {
                         margin: EdgeInsets.symmetric(horizontal: 20),
                         padding: EdgeInsets.symmetric(vertical: 10),
                         child: Text(forgotPwd,
-                            style: TextStyle(fontSize: 14,
+                            style: TextStyle(
+                                fontSize: 14,
                                 fontWeight: FontWeight.w600,
                                 color: HexColor("#777777"),
                                 letterSpacing: 0.5)),
@@ -284,7 +290,11 @@ class _SignInClassState extends State<SignInClass> {
                       padding: EdgeInsets.symmetric(vertical: 10),
                       alignment: Alignment.center,
                       child: Text(noAccount,
-                          style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, letterSpacing: 0.5, color: HexColor("#777777"))),
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: 0.5,
+                              color: HexColor("#777777"))),
                     ),
                     SizedBox(
                       height: 5,
