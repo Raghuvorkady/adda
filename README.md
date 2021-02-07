@@ -32,4 +32,4 @@ For developing the app, I have implemented few of the good features which are cu
 
 ### Demo
 
-Check out demo video of the app [here](https://youtu.be/YeGTDmMumXE)
+[![YouTube-Thumbnail](assets/screenshots/yt-thumbnail.png)](https://youtu.be/YeGTDmMumXE)
